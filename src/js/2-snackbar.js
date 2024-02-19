@@ -7,13 +7,13 @@ let form = document.querySelector('.form');
 
 form.addEventListener('submit', createPromise);
 
-function createPromise(event) {
-  event.preventDefault();
+function createPromise(e) {
+  e.preventDefault();
   const radioValue = Array.from(twoinput).find(item => {
     return item.checked;
   }).value;
   const delay = inputDelay.value;
-
+  
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
       if (radioValue === 'fulfilled') {
@@ -21,7 +21,7 @@ function createPromise(event) {
       } else {
         reject(`❌ Rejected promise in ${delay}ms`);
       }
-    }, delay);
+    });
   });
 
   promise
@@ -29,16 +29,14 @@ function createPromise(event) {
       iziToast.show({
         message,
         position: 'topRight',
-        // title: 'Success',
-        color: 'green',
+        color: 'green'
       });
     })
     .catch(message => {
       iziToast.show({
         message,
         position: 'topRight',
-        // title: 'Warning',
-        color: 'red',
+        color: 'red'
       });
     });
 }
